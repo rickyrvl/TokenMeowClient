@@ -1,0 +1,30 @@
+{
+  "name": "token-meow-client",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "@tauri-apps/api": "^3.0.0",
+    "@tauri-apps/plugin-shell": "^3.0.0",
+    "@tauri-apps/plugin-updater": "^3.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0",
+    "qrcode.react": "^4.1.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^3.0.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.0"
+  }
+}

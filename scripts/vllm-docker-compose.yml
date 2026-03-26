@@ -1,0 +1,38 @@
+# vLLM Docker Compose for Windows/Linux
+# Usage: docker-compose -f vllm-docker-compose.yml up -d
+
+version: '3.8'
+
+services:
+  vllm:
+    image: vllm/vllm-openai:latest
+    container_name: vllm-server
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - vllm-models:/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    command: >
+      --model Qwen/Qwen3.5-9B-Instruct
+      --port 8000
+      --gpu-memory-utilization 0.9
+      --max-model-len 4096
+      --tensor-parallel-size 1
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=all
+
+volumes:
+  vllm-models:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /opt/compute/models  # Linux path
