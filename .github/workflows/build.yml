@@ -31,21 +31,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.target }}
-
-      - name: Cache Rust dependencies
-        uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: './src-tauri'
 
       - name: Install dependencies (Ubuntu)
         if: matrix.platform == 'ubuntu-22.04'
@@ -58,7 +52,7 @@ jobs:
         run: brew install gtk+3 webkit2gtk-4.1
 
       - name: Install npm dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build Tauri app
         uses: tauri-apps/tauri-action@v0
