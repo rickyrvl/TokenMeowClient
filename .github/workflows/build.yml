@@ -14,13 +14,13 @@ jobs:
       matrix:
         include:
           - platform: 'macos-latest'
-            target: 'aarch64-apple-darwin'
+            rust_target: 'aarch64-apple-darwin'
           - platform: 'macos-latest'
-            target: 'x86_64-apple-darwin'
+            rust_target: 'x86_64-apple-darwin'
           - platform: 'ubuntu-22.04'
-            target: ''
+            rust_target: ''
           - platform: 'windows-latest'
-            target: ''
+            rust_target: ''
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -33,9 +33,14 @@ jobs:
           node-version: '20'
 
       - name: Install Rust
+        if: matrix.rust_target != ''
         uses: dtolnay/rust-toolchain@stable
         with:
-          targets: ${{ matrix.target }}
+          targets: ${{ matrix.rust_target }}
+
+      - name: Install Rust (no target)
+        if: matrix.rust_target == ''
+        uses: dtolnay/rust-toolchain@stable
 
       - name: Install dependencies (Ubuntu)
         if: matrix.platform == 'ubuntu-22.04'
@@ -51,7 +56,7 @@ jobs:
         run: npm install
 
       - name: Build Tauri app
-        run: npm run tauri build -- ${{ matrix.target && format('--target {0}', matrix.target) || '' }}
+        run: npm run tauri build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
