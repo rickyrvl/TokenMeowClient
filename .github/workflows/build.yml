@@ -52,7 +52,12 @@ jobs:
         run: npm install
 
       - name: Build Tauri app
-        run: npm run tauri build
+        run: |
+          echo "=== Starting Tauri build ==="
+          npm run tauri build --verbose 2>&1 || true
+          echo "=== Build finished ==="
+          ls -la src-tauri/target/ 2>/dev/null || echo "No target directory"
+          ls -la src-tauri/target/release/ 2>/dev/null || echo "No release directory"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
