@@ -1,4 +1,3 @@
-use crate::AppState;
 use log::info;
 use tauri::{
     menu::{Menu, MenuItem},

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.tauri.app/config/3",
+  "$schema": "https://schema.tauri.app/config/2",
   "productName": "TokenMeowClient",
   "version": "1.0.0",
   "identifier": "com.tokenmeow.client",

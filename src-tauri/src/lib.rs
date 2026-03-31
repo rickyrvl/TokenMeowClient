@@ -8,7 +8,6 @@ mod tray;
 use log::{error, info};
 use std::sync::Mutex;
 use tauri::{Manager, WindowEvent};
-use tray::TrayManager;
 
 pub struct AppState {
     pub machine_id: Mutex<Option<String>>,

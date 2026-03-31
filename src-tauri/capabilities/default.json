@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.tauri.app/capabilities/3.0.0/schema.json",
+  "$schema": "https://schemas.tauri.app/capabilities/2.0.0/schema.json",
   "identifier": "default",
   "description": "Default capabilities for TokenMeow Client",
   "windows": ["main"],
