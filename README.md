@@ -89,9 +89,25 @@ npm run tauri dev
 npm run tauri build
 ```
 
-## 三平台打包指令
+## GitHub Actions 自動構建（推薦）
 
-### macOS (.dmg)
+每次 push 或發布 tag 都會自動生成三平台安裝檔：
+
+1. 將代碼推送到 GitHub
+2. 前往 **Actions** 頁面查看構建進度
+3. 構建完成後，在 **Release** 或 **Artifacts** 下載各平台安裝檔
+
+### 手動本地構建
+
+#### 前置需求
+
+- Node.js 18+
+- Rust 1.70+
+- Xcode Command Line Tools (macOS)
+- Visual Studio Build Tools (Windows)
+- Docker (Windows/Linux)
+
+#### macOS (.dmg)
 
 ```bash
 npm run tauri build -- --target universal-apple-darwin
@@ -103,8 +119,15 @@ npm run tauri build -- --target x86_64-apple-darwin
 
 ### Windows (.exe / .msi)
 
-```bash
-npm run tauri build -- --target x86_64-pc-windows-msvc
+**注意：Windows 安裝檔需要在 Windows 環境中構建。**
+
+使用 GitHub Actions（推薦）：
+1. 推送代碼到 GitHub
+2. 在 Releases 頁面下載 `*-x64-setup.exe`
+
+本地 Windows 構建：
+```powershell
+npm run tauri build
 ```
 
 ### Linux (.AppImage / .deb)
