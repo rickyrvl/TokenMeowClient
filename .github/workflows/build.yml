@@ -53,11 +53,16 @@ jobs:
 
       - name: Build Tauri app
         run: |
-          echo "=== Starting Tauri build ==="
-          npm run tauri build --verbose 2>&1 || true
-          echo "=== Build finished ==="
-          ls -la src-tauri/target/ 2>/dev/null || echo "No target directory"
-          ls -la src-tauri/target/release/ 2>/dev/null || echo "No release directory"
+          echo "=== Build Info ==="
+          echo "Platform: ${{ matrix.platform }}"
+          node --version
+          npm --version
+          cargo --version || echo "Cargo not found"
+          rustc --version || echo "Rustc not found"
+          echo "=== Cargo Check ==="
+          cd src-tauri && cargo check 2>&1 | tail -50 || true
+          echo "=== Tauri Build ==="
+          npm run tauri build 2>&1 | tail -100
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
